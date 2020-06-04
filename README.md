@@ -4,3 +4,5 @@
 
 
 taken from the site: http://opk.afti.ru/tasks/programma-dialog
+
+run terminal.py to start programm
