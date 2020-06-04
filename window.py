@@ -4,8 +4,9 @@ import LineInput
 import TextMessage
 import DialogMain
 
-
+ 
 def main(cmp, dialog_name, text):
+#This function will choose type of our dialog 
     if cmp == 's':
         Announcement.main(dialog_name, text)
     elif cmp == 'd':

@@ -3,7 +3,7 @@ import sys
 import Help
 import window
 
-
+#This function will read our args
 def main(argv):
     d = {'-s': 's', '-d': 'd', '-p': 'p', '-t': 't', '-m': 'm'}
     cmp = ""

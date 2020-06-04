@@ -6,6 +6,7 @@ from curses.textpad import rectangle
 
 
 def DrawMenu(stdscr, dialog_name, text):
+#This function will create window and write in our text
     curses.noecho()
     curses.cbreak()
     curses.curs_set(0)
@@ -20,14 +21,18 @@ def DrawMenu(stdscr, dialog_name, text):
     lenstr = width - 5
     
     stdscr.clear()
-    stdscr.addstr(0, width//2 - len(dialog_name)//2, "{}".format(dialog_name))
+    
+    stdscr.addstr(0, width//2 - len(dialog_name)//2, "{}".format(dialog_name))#Create dialog name
+    
     stdscr.refresh()
     
+    #Create buttons
     OKButton = Button.CreateButton((width // 2) - 5, height - 5, "OK")
     Painter.PaintButton(stdscr, OKButton)
-    rectangle(stdscr, 1, 1, height - 7, width - 2)
     
-    for i in text:
+    rectangle(stdscr, 1, 1, height - 7, width - 2)#Create window borders
+    
+    for i in text:#Character-by-character recording of our text
         while len(i) != 0 and y + 2 < height - 7:
             if x + 2 > lenstr:
                 stdscr.addch(y + 2, x + 2, "-")
@@ -45,11 +50,13 @@ def DrawMenu(stdscr, dialog_name, text):
     stdscr.refresh()
     
     while(True):
-        event = stdscr.getch()
+        event = stdscr.getch()#press button
+        
         if event == curses.KEY_MOUSE:
-            _, mx, my, _, _ = curses.getmouse()
-        if ButtonProcessor.IsButtonPressed(OKButton, mx, my):
-            break
+            _, mx, my, _, _ = curses.getmouse()#mx, my - coordinates of our click
+            if ButtonProcessor.IsButtonPressed(OKButton, mx, my):#Check are we pressed button or not
+                break
+                
     curses.endwin()
             
 

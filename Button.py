@@ -10,6 +10,7 @@ class Button:
 
 
 def CreateButton(x, y, label):
+#Create button with args
     button = Button()
     button.X = x
     button.Y = y
@@ -20,6 +21,7 @@ def CreateButton(x, y, label):
  
  
 def CreateMenuButton(x, y, label, j):
+#Create special button for menu with args
     button = Button()
     button.X = x
     button.Y = y

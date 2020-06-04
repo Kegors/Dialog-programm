@@ -6,6 +6,7 @@ from curses.textpad import rectangle
 
 
 def DrawMenu(stdscr, dialog_name, text):
+#This function will draw menu with our args
     stdscr = curses.initscr()
     curses.noecho()
     curses.cbreak()
@@ -20,20 +21,24 @@ def DrawMenu(stdscr, dialog_name, text):
     height, width = stdscr.getmaxyx()
     lenstr = width - 5
     
-    
     stdscr.clear()
-    stdscr.addstr(0, width//2 - len(dialog_name)//2, "{}".format(dialog_name))
+    
+  
+    stdscr.addstr(0, width//2 - len(dialog_name)//2, "{}".format(dialog_name))#Create dialog name
+    
     stdscr.refresh()
     
+    #Create buttons YES ad NO
     YESButton = Button.CreateButton((width // 3) - 5, height - 5, "YES")
     NOButton = Button.CreateButton((width // 3*2) - 5, height - 5, "NO")
-          
+     
+    #Draw our buttons
     Painter.PaintButton(stdscr, YESButton)
     Painter.PaintButton(stdscr, NOButton)
     
-    rectangle(stdscr, 1, 1, height - 7, width - 2)
+    rectangle(stdscr, 1, 1, height - 7, width - 2)#Create window borders
     
-    for i in text:
+    for i in text:#Character-by-character recording of our text
         while len(i) != 0 and y + 2 < height - 7:
             if x + 2 > lenstr:
                 stdscr.addch(y + 2, x + 2, "-")
@@ -51,16 +56,16 @@ def DrawMenu(stdscr, dialog_name, text):
     stdscr.refresh()
     
     while(True):
-        event = stdscr.getch()
+        event = stdscr.getch()#press button
         
         if event == curses.KEY_MOUSE:
-            _, mx, my, _, _ = curses.getmouse()
+            _, mx, my, _, _ = curses.getmouse()#mx, my - coordinates of our click
             
-            if ButtonProcessor.IsButtonPressed(YESButton, mx, my):
+            if ButtonProcessor.IsButtonPressed(YESButton, mx, my):#Check are we pressed button or not
                 raise SystemExit(3)
 
             
-            if ButtonProcessor.IsButtonPressed(NOButton, mx, my):
+            if ButtonProcessor.IsButtonPressed(NOButton, mx, my):#Check are we pressed button or not
                raise SystemExit(4)
             
     curses.endwin()
