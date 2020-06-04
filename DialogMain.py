@@ -34,12 +34,16 @@ def DrawMenu(stdscr, dialog_name, text):
         Painter.PaintButton(stdscr, buttonarr[i])
     
     while(True):
+    
         event = stdscr.getch()
+        
         if event == curses.KEY_MOUSE:
             _, mx, my, _, _ = curses.getmouse()
-        for i in range(j):
-            if ButtonProcessor.IsButtonPressed(buttonarr[i], mx, my):
-                raise SystemExit(2+i)
+            
+            for i in range(j):
+                if ButtonProcessor.IsButtonPressed(buttonarr[i], mx, my):
+                    raise SystemExit(2+i)
+                    
     curses.endwin()
             
 

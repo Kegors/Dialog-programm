@@ -12,6 +12,7 @@ def DrawMenu(stdscr, dialog_name, text):
     curses.cbreak()
     curses.curs_set(1)
     curses.mousemask(1)
+    
     index = 0
     ourstr = ""
     x=2
@@ -19,13 +20,14 @@ def DrawMenu(stdscr, dialog_name, text):
     mx = 0
     my = 0
     height, width = stdscr.getmaxyx()
+    lenstr = width - 5
+    
+    
     stdscr.clear()
     stdscr.addstr(0, width//2 - len(dialog_name)//2, "{}".format(dialog_name))
     stdscr.refresh()
     
     OKButton = Button.CreateButton((width // 2) - 5, height - 5, "OK")
-    
-    lenstr = width - 5
     
     Painter.PaintButton(stdscr, OKButton)
     
@@ -52,16 +54,23 @@ def DrawMenu(stdscr, dialog_name, text):
     while(True):
         x = 2
         y = 2
+        
         event = stdscr.getch()
+        
         if event == curses.KEY_MOUSE:
+        
             _, mx, my, _, _ = curses.getmouse()
+            
         if ButtonProcessor.IsButtonPressed(OKButton, mx, my):
+        
             break
             
         if event == curses.KEY_PPAGE and index != 0:
+        
             index -= 1
             allstr = ourstr[lenstr*index: lenstr*index + lenstr*(height-9)]
             CleanWindow.main(stdscr, 2, 2, width - 2, height -7)
+            
             for i in range(len(allstr)):
                 if x == width - 3:
                     

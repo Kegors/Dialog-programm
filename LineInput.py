@@ -7,6 +7,7 @@ from curses.textpad import rectangle
 
 
 def DrawMenu(stdscr, dialog_name, text):
+
     curses.noecho()
     curses.cbreak()
     curses.curs_set(1)
@@ -61,12 +62,11 @@ def DrawMenu(stdscr, dialog_name, text):
         
         stdscr.move(cursor_y, cursor_x)
         
-        #stdscr.addstr(height-1, 0, "{} {}".format(cursor_x, cursor_y))
-        
         if event == curses.KEY_MOUSE:
             _, mx, my, _, _ = curses.getmouse()
-        if ButtonProcessor.IsButtonPressed(OKButton, mx, my):
-            break
+            
+            if ButtonProcessor.IsButtonPressed(OKButton, mx, my):
+                break
         
         if event >= 97 and event <= 126 or event==32:
             a = ((cursor_y-2)*width+ (cursor_x-2))
@@ -80,6 +80,7 @@ def DrawMenu(stdscr, dialog_name, text):
             y = 2
             
             for i in range(len(allstr)):
+            
                 if x == width - 3:
                     
                     stdscr.addch(y, x, "-")
@@ -120,6 +121,7 @@ def DrawMenu(stdscr, dialog_name, text):
             y = 2
             
             for i in range(len(allstr)):
+            
                 if x == width - 3:
                     
                     stdscr.addch(y, x, "-")
@@ -144,6 +146,7 @@ def DrawMenu(stdscr, dialog_name, text):
             y = 2
             
             for i in range(len(allstr)):
+            
                 if x == width - 3:
                     
                     stdscr.addch(y, x, "-")
